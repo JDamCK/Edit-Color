@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Personalizado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="profile-section">
+        <img id="avatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+        <h2>Hola, <span id="username">Usuario</span></h2>
+        <p>Selecciona el color hexadecimal que deseas para tu nombre en el servidor.</p>
+    </div>
+
+    <div class="color-picker-container">
+        <input type="color" id="colorPicker" value="#5865F2">
+        <input type="text" id="hexInput" class="hex-input" value="#5865F2" maxlength="7">
+    </div>
+
+    <div class="buttons">
+        <button id="btnSave" class="btn-primary">Guardar Color</button>
+        <button id="btnRemove" class="btn-danger">Restablecer</button>
+    </div>
+
+    <div id="status"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
