@@ -98,13 +98,13 @@ function toggleLoading(button, isLoading) {
     }
 }
 
-btnSave.addEventListener('click', async (e) => {
+btnSave.addEventListener('click', async () => {
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
     const color = '#' + hexInput.value;
     if (!/^#[0-9A-F]{6}$/i.test(color)) return showStatus('Error: Código HEX inválido.', true);
 
-    toggleLoading(e.currentTarget, true);
+    toggleLoading(btnSave, true);
     try {
         const res = await fetch('https://remir.onrender.com/api/set-color', {
             method: 'POST',
@@ -121,7 +121,7 @@ btnSave.addEventListener('click', async (e) => {
     } catch (err) {
         showStatus('Error de conexión con el servidor.', true);
     }
-    toggleLoading(e.currentTarget, false);
+    toggleLoading(btnSave, false);
 });
 
 btnRemove.addEventListener('click', async () => {
