@@ -90,6 +90,7 @@ function showStatus(msg, isError = false) {
 }
 
 function toggleLoading(button, isLoading) {
+    if (!button) return;
     if (isLoading) {
         button.classList.add('loading');
     } else {
@@ -123,10 +124,10 @@ btnSave.addEventListener('click', async (e) => {
     toggleLoading(e.currentTarget, false);
 });
 
-btnRemove.addEventListener('click', async (e) => {
+btnRemove.addEventListener('click', async () => {
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
-    toggleLoading(e.currentTarget, true);
+    btnRemove.disabled = true;
     try {
         const res = await fetch('https://remir.onrender.com/api/remove-color', {
             method: 'POST',
@@ -147,5 +148,5 @@ btnRemove.addEventListener('click', async (e) => {
     } catch (err) {
         showStatus('Error de conexión con el servidor.', true);
     }
-    toggleLoading(e.currentTarget, false);
+    btnRemove.disabled = false;
 });
