@@ -1,3 +1,4 @@
+console.log('Script v6 cargado correctamente.');
 // Obtener parámetros de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get('token');
@@ -90,6 +91,7 @@ function showStatus(msg, isError = false) {
 }
 
 function toggleLoading(button, isLoading) {
+    console.log('toggleLoading:', button ? button.id : 'null', isLoading);
     if (!button) return;
     if (isLoading) {
         button.classList.add('loading');
@@ -99,6 +101,7 @@ function toggleLoading(button, isLoading) {
 }
 
 btnSave.addEventListener('click', async () => {
+    console.log('btnSave clicked');
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
     const color = '#' + hexInput.value;
@@ -119,9 +122,12 @@ btnSave.addEventListener('click', async () => {
             showStatus(data.error || 'Error al guardar el color.', true);
         }
     } catch (err) {
+        console.error('Fetch error:', err);
         showStatus('Error de conexión con el servidor.', true);
+    } finally {
+        console.log('Stopping loading state inside finally');
+        toggleLoading(btnSave, false);
     }
-    toggleLoading(btnSave, false);
 });
 
 btnRemove.addEventListener('click', async () => {
