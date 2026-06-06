@@ -89,23 +89,21 @@ function showStatus(msg, isError = false) {
     }, 4000);
 }
 
-function toggleLoading(isLoading) {
+function toggleLoading(button, isLoading) {
     if (isLoading) {
-        btnSave.classList.add('loading');
-        btnRemove.classList.add('loading');
+        button.classList.add('loading');
     } else {
-        btnSave.classList.remove('loading');
-        btnRemove.classList.remove('loading');
+        button.classList.remove('loading');
     }
 }
 
-btnSave.addEventListener('click', async () => {
+btnSave.addEventListener('click', async (e) => {
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
     const color = '#' + hexInput.value;
     if (!/^#[0-9A-F]{6}$/i.test(color)) return showStatus('Error: Código HEX inválido.', true);
 
-    toggleLoading(true);
+    toggleLoading(e.currentTarget, true);
     try {
         const res = await fetch('https://remir.onrender.com/api/set-color', {
             method: 'POST',
@@ -122,13 +120,13 @@ btnSave.addEventListener('click', async () => {
     } catch (err) {
         showStatus('Error de conexión con el servidor.', true);
     }
-    toggleLoading(false);
+    toggleLoading(e.currentTarget, false);
 });
 
-btnRemove.addEventListener('click', async () => {
+btnRemove.addEventListener('click', async (e) => {
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
-    toggleLoading(true);
+    toggleLoading(e.currentTarget, true);
     try {
         const res = await fetch('https://remir.onrender.com/api/remove-color', {
             method: 'POST',
@@ -149,5 +147,5 @@ btnRemove.addEventListener('click', async () => {
     } catch (err) {
         showStatus('Error de conexión con el servidor.', true);
     }
-    toggleLoading(false);
+    toggleLoading(e.currentTarget, false);
 });
