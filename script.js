@@ -1,4 +1,4 @@
-console.log('Script v6 cargado correctamente.');
+console.log('Script cargado correctamente.');
 // Obtener parámetros de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get('token');
@@ -133,7 +133,7 @@ btnSave.addEventListener('click', async () => {
 btnRemove.addEventListener('click', async () => {
     if (!token) return showStatus('Error: Faltan credenciales de seguridad.', true);
 
-    btnRemove.disabled = true;
+    toggleLoading(btnRemove, true);
     try {
         const res = await fetch('https://remir.onrender.com/api/remove-color', {
             method: 'POST',
@@ -153,6 +153,7 @@ btnRemove.addEventListener('click', async () => {
         }
     } catch (err) {
         showStatus('Error de conexión con el servidor.', true);
+    } finally {
+        toggleLoading(btnRemove, false);
     }
-    btnRemove.disabled = false;
 });
